@@ -1,0 +1,1190 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Odontograma infantil · SESAI</title>
+<meta name="theme-color" content="#FFFFFF">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Montserrat:wght@700;800&display=swap">
+<style>
+:root{
+  --bg:#F6F5F1; --surface:#FFFFFF; --surface-2:#F1F0EB; --ink:#1B1B1B; --muted:#5B5F63; --line:#DDDBD3;
+  --accent:#0B7A3E; --accent-soft:#E3F1E8; --focus:#F5B301;
+  --c-vermelho:#E2231A; --c-amarelo:#F7B500; --c-verde:#13924B; --c-azul:#1F5FAD;
+  --titulo:"Montserrat", "Atkinson Hyperlegible", system-ui, sans-serif;
+  --carie:#D7263D; --carie-cr:#7E3524; --mba:#F4B4BD; --mbi:#C3CDD5; --rest:#2F67D8; --sel:#27946A;
+  --enamel:#FCFCFA; --dor:#E07A1F;
+  --r-sm:6px; --r-md:10px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  font-family:"Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color:var(--ink); background:var(--bg);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font-size:16px;line-height:1.45;background:var(--bg);padding-bottom:150px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+[hidden]{display:none!important}
+
+/* topo */
+.topo{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 16px 10px;color:var(--ink);background:repeating-linear-gradient(90deg,var(--c-vermelho) 0 36px,var(--c-amarelo) 36px 72px,var(--c-verde) 72px 108px,var(--c-azul) 108px 144px) top/100% 6px no-repeat,#fff}
+.marca{display:flex;align-items:center;gap:10px}
+.marca h1{font-family:var(--titulo);font-size:1.2rem;margin:0;font-weight:800;letter-spacing:-.01em;line-height:1.15}
+.marca h1 .sub{display:block;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-top:2px}
+h2,h3{font-family:var(--titulo);font-weight:700;letter-spacing:-.005em}
+.rede{font-size:.85rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 12px;display:flex;gap:8px;align-items:center;cursor:pointer}
+.rede .ponto{width:9px;height:9px;border-radius:50%;background:var(--c-verde);flex:none}
+.rede.off .ponto{background:var(--focus)}
+.abas{display:flex;gap:4px;padding:0 10px;background:#fff;border-bottom:1px solid var(--line);overflow-x:auto}
+.abas button{color:var(--muted);background:none;border:0;padding:10px 12px 9px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+.abas button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);font-weight:700}
+.contador{display:inline-block;min-width:20px;padding:0 6px;margin-left:4px;border-radius:999px;background:var(--focus);color:var(--ink);font-size:.75rem;font-weight:700;text-align:center}
+
+main{max-width:1100px;margin:0 auto;padding:16px}
+.bloco{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:16px;margin-bottom:16px}
+.bloco-topo{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.bloco h2{font-size:1.1rem;margin:0}
+.dica{font-size:.875rem;color:var(--muted);margin:0}
+.aviso{background:#FFF4D6;border:1px solid #F0D48A;border-radius:var(--r-md);padding:12px 14px;margin-bottom:16px;font-size:.95rem}
+.aviso button{margin-left:6px}
+
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.campo{display:flex;flex-direction:column;gap:4px;font-size:.875rem;color:var(--muted)}
+.campo.largo{grid-column:1/-1}
+input,select,textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 10px;min-height:44px;width:100%}
+textarea{min-height:76px;resize:vertical}
+input:disabled,select:disabled{background:var(--surface-2);color:var(--muted)}
+
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:var(--surface);padding:9px 14px;cursor:pointer;border-right:1px solid var(--line);min-height:42px}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff;font-weight:700}
+.seg.pequeno button{padding:6px 10px;min-height:36px;font-size:.875rem}
+.seg.pequeno button[data-val=""][aria-pressed="true"]{background:var(--surface-2);color:var(--muted);font-weight:400}
+.seg.pequeno button[data-val="indicado"][aria-pressed="true"]{background:#FFF1CC;color:#6B4B00}
+.seg.pequeno button[data-val="realizado"][aria-pressed="true"]{background:var(--accent);color:#fff}
+
+.prim{font-weight:700;background:var(--accent);color:#fff;border:0;border-radius:var(--r-sm);padding:11px 18px;cursor:pointer;min-height:46px}
+.prim:disabled{opacity:.5;cursor:not-allowed}
+.sec{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 16px;cursor:pointer;min-height:44px}
+.sec:disabled{opacity:.5;cursor:not-allowed}
+.link{background:none;border:0;padding:0;color:var(--accent);text-decoration:underline;cursor:pointer;font-size:.875rem}
+.perigo{color:var(--carie)}
+
+/* paleta */
+.paleta-grupo{display:flex;align-items:center;gap:6px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}
+.paleta-rot{flex:none;font-size:.8rem;color:var(--muted);width:92px}
+.ferr{flex:none;display:flex;align-items:center;gap:8px;font-size:.875rem;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px 6px 7px;cursor:pointer;min-height:38px}
+.ferr[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink);background:var(--surface-2);font-weight:700}
+.amostra{width:20px;height:20px;border-radius:4px;border:1px solid rgba(20,50,74,.35);flex:none;display:grid;place-items:center;font-size:12px;font-weight:700;line-height:1;background:var(--enamel)}
+
+/* odontograma */
+.odonto{overflow-x:auto;padding:10px 0 6px;margin-top:6px;border-top:1px solid var(--line)}
+.odonto-in{width:max-content;margin:0 auto}
+.arcada{display:flex}
+.arcada.corte{margin-top:12px;padding-top:12px;border-top:2px solid var(--line)}
+.arcada.dec.sup{margin-top:6px}
+.arcada.perm.inf{margin-top:6px}
+.quad{display:flex;gap:4px;width:calc(8*42px + 7*4px + 20px);padding:0 10px}
+.quad.dir{justify-content:flex-end;border-right:2px solid var(--line)}
+.quad.esq{justify-content:flex-start}
+.dente{display:flex;flex-direction:column;align-items:center;gap:2px;width:42px;flex:none}
+.dente .num{font-size:.8rem;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums;background:none;border:0;border-radius:4px;padding:1px 5px;cursor:pointer;min-height:22px}
+.dente .num:hover{background:var(--surface-2);color:var(--ink)}
+.dente.dec .num{color:var(--accent)}
+.dente.ativo .num{background:var(--ink);color:#fff}
+.dente svg{width:42px;height:42px;display:block;cursor:pointer;overflow:visible}
+.face{fill:var(--enamel);stroke:#6D8594;stroke-width:1;transition:fill .12s}
+.face:hover{stroke:var(--ink);stroke-width:2}
+.ov{pointer-events:none}
+.st-nao_erupc .face{fill:transparent!important;stroke-dasharray:3 2;opacity:.55}
+.st-ausente .face,.st-ausente_carie .face{fill:var(--surface-2)!important;opacity:.45}
+.legenda-arcos{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);padding:0 12px}
+
+.linha-opcoes{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center}
+.opcao{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.opcao > span{font-size:.875rem;color:var(--muted)}
+.checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:6px 16px;margin-top:8px}
+.check{display:flex;align-items:center;gap:10px;min-height:40px;cursor:pointer}
+.check input{width:22px;height:22px;min-height:0;flex:none;accent-color:var(--accent)}
+
+/* resultado */
+.resultado{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(20,50,74,.12);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px))}
+.res-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.classe{width:58px;height:58px;border-radius:12px;display:grid;place-items:center;font-size:2.1rem;font-weight:700;color:#fff;flex:none;background:#999}
+.classe.mini{width:42px;height:42px;font-size:1.45rem;border-radius:9px}
+[data-c="A"]{background:#2E8B57}[data-c="B"]{background:#5E9C35}[data-c="C"]{background:#D7A406;color:var(--ink)}
+[data-c="D"]{background:#E07A1F}[data-c="E"]{background:#D7263D}[data-c="F"]{background:#86112C}
+.res-txt{flex:1 1 230px;min-width:0}
+.res-txt strong{display:block;font-size:1.05rem}
+.res-txt span{font-size:.875rem;color:var(--muted);display:block}
+.indices{display:flex;gap:16px;font-size:.8rem;color:var(--muted)}
+.indices b{display:block;font-size:1.2rem;color:var(--ink);font-variant-numeric:tabular-nums}
+.res-acoes{display:flex;gap:8px;align-items:center}
+.motivos{max-height:34vh;overflow:auto;max-width:1100px;margin:10px auto 0;padding:10px 12px 10px 30px;font-size:.9rem;background:var(--surface-2);border-radius:var(--r-sm)}
+.motivos li{margin:2px 0}
+
+/* painel do dente */
+.fundo{position:fixed;inset:0;z-index:40;background:rgba(20,50,74,.45);display:flex;align-items:flex-end;justify-content:center}
+.painel{background:var(--surface);width:100%;max-width:660px;max-height:90vh;overflow:auto;border-radius:16px 16px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px))}
+@media (min-width:720px){.fundo{align-items:center}.painel{border-radius:16px}}
+.p-topo{display:flex;gap:14px;align-items:center;margin-bottom:8px}
+.p-topo svg{width:76px;height:76px;flex:none}
+.p-topo h3{margin:0;font-size:1.3rem}
+.p-topo p{margin:0;color:var(--muted);font-size:.9rem}
+.fechar{margin-left:auto;background:none;border:0;font-size:1.8rem;line-height:1;cursor:pointer;padding:4px 10px;color:var(--muted)}
+.painel h4{margin:18px 0 8px;font-size:.95rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;cursor:pointer;font-size:.9rem;min-height:38px}
+.chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:700}
+.faces{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.proc{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--surface-2);flex-wrap:wrap}
+.proc > span{font-size:.95rem}
+.p-acoes{display:flex;justify-content:space-between;gap:10px;margin-top:18px;flex-wrap:wrap}
+
+/* lista */
+.lista-topo{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.exame{display:flex;gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface);margin-top:8px;flex-wrap:wrap}
+.exame .info{flex:1 1 200px;min-width:0}
+.exame .info strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.exame .info span{font-size:.85rem;color:var(--muted)}
+.estado{font-size:.8rem;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.estado.enviado{background:#DDF1E5;color:#1D6B43}
+.estado.pendente{background:#FFF1CC;color:#7A5600}
+.estado.erro{background:#FBDDE1;color:#9B1B2E}
+.vazio{text-align:center;padding:28px 12px;color:var(--muted)}
+
+.toast{position:fixed;left:50%;bottom:120px;transform:translateX(-50%);z-index:60;background:var(--ink);color:#fff;padding:10px 16px;border-radius:var(--r-sm);max-width:min(92vw,520px);font-size:.95rem;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+/* cadastro */
+.cad-status{margin:12px 0 0;padding:10px 12px;border-radius:var(--r-sm);font-size:.95rem}
+.cad-status.ok{background:#DDF1E5;color:#1D6B43}
+.cad-status.falta{background:#FFF4D6;color:#6B4B00}
+.cad-acoes{display:flex;justify-content:flex-end;margin-bottom:8px}
+.prof{margin:0 2px 12px;font-size:.95rem;color:var(--muted)}
+.prof b{color:var(--ink)}
+/* painel */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px}
+.kpi b{display:block;font-size:1.9rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi span{font-size:.85rem;color:var(--muted)}
+.p-grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px;margin-bottom:16px}
+.p-grade .bloco{margin:0}
+.bloco h3{font-size:1rem;margin:0 0 12px}
+.linha-barra{display:grid;grid-template-columns:30px 1fr 52px;gap:10px;align-items:center;margin:7px 0}
+.linha-barra .val{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+.classe.micro{width:28px;height:28px;font-size:.95rem;border-radius:6px}
+.barra{display:block;height:16px;background:var(--surface-2);border-radius:3px;overflow:hidden}
+.barra span{display:block;height:100%;border-radius:3px}
+.tabela{overflow-x:auto}
+.tabela table{border-collapse:collapse;width:100%;font-size:.9rem;font-variant-numeric:tabular-nums}
+.tabela th,.tabela td{padding:7px 8px;border-bottom:1px solid var(--surface-2);text-align:right;white-space:nowrap}
+.tabela th:first-child,.tabela td:first-child{text-align:left}
+.tabela th{color:var(--muted);font-weight:700;font-size:.8rem;vertical-align:bottom}
+.tabela tr.meu td{background:var(--accent-soft);font-weight:700}
+.meses{display:flex;align-items:flex-end;gap:8px;height:150px;overflow-x:auto;padding-top:6px}
+.mes{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;min-width:40px;height:100%;font-size:.75rem;color:var(--muted)}
+.mes i{display:block;width:24px;background:var(--accent);border-radius:3px 3px 0 0}
+.mes b{color:var(--ink);font-size:.85rem}
+.nota{font-size:.82rem;color:var(--muted);margin:4px 0 0}
+.destaque{font-size:1.6rem;font-weight:700;font-variant-numeric:tabular-nums}
+@media (max-width:600px){
+  .res-in{gap:10px}
+  .classe{width:48px;height:48px;font-size:1.7rem}
+  .res-txt{flex:1 1 150px}
+  .res-txt span{display:none}
+  .res-acoes{margin-left:auto}
+  .toast{bottom:140px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="pRestC" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+      <rect width="6" height="6" fill="#2F67D8"/><rect width="3" height="6" fill="#D7263D"/>
+    </pattern>
+  </defs>
+</svg>
+
+<header class="topo">
+  <div class="marca">
+    <svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="4" fill="none" stroke="#1B1B1B" stroke-width="2.5"/><path d="M2 2 13 13M38 2 27 13M2 38 13 27M38 38 27 27" stroke="#1B1B1B" stroke-width="2.5"/><rect x="13" y="13" width="7" height="7" fill="#E2231A"/><rect x="20" y="13" width="7" height="7" fill="#F7B500"/><rect x="13" y="20" width="7" height="7" fill="#13924B"/><rect x="20" y="20" width="7" height="7" fill="#1F5FAD"/></svg>
+    <h1>Odontograma infantil<span class="sub">SESAI · Saúde bucal</span></h1>
+  </div>
+  <button id="rede" class="rede" type="button" title="Enviar exames pendentes"><span class="ponto"></span><span id="redeTxt">Online</span></button>
+</header>
+<nav class="abas" role="tablist">
+  <button role="tab" data-aba="config" aria-selected="false">Cadastro</button>
+  <button role="tab" data-aba="exame" aria-selected="true">Exame</button>
+  <button role="tab" data-aba="lista" aria-selected="false">Exames salvos<span id="contPend" class="contador" hidden></span></button>
+  <button role="tab" data-aba="painel" aria-selected="false">Painel</button>
+</nav>
+
+<main>
+  <!-- EXAME -->
+  <section id="aba-exame">
+    <div id="avisoArmaz" class="aviso" hidden>Este navegador não está guardando dados de forma permanente. Os exames podem se perder ao fechar a página: abra o aplicativo pelo endereço publicado ou instale-o na tela inicial.</div>
+    <div id="avisoConfig" class="aviso" hidden>Complete seu cadastro antes do primeiro exame. <button class="link" data-ir="config">Abrir cadastro</button></div>
+    <div id="avisoEdicao" class="aviso" hidden>Você está editando um exame já salvo. <button class="link" id="cancelarEdicao">Descartar alterações</button></div>
+
+    <p class="prof" id="profLinha"></p>
+
+    <div class="bloco">
+      <div class="bloco-topo"><h2>Local do atendimento</h2><button class="link" id="novoExame">Começar novo exame</button></div>
+      <div class="grade">
+        <label class="campo">UF<select data-campo="uf" class="lista-uf"></select></label>
+        <label class="campo">DSEI<select data-campo="dsei" id="exDsei"></select></label>
+        <label class="campo">Polo base<input data-campo="polo" autocomplete="off" placeholder="Só o nome do polo"></label>
+        <label class="campo">Aldeia ou comunidade<input data-campo="aldeia" autocomplete="off" placeholder="Só o nome, ex.: Kamaiurá"></label>
+        <label class="campo">Data do exame<input type="date" data-campo="dataExame"></label>
+      </div>
+    </div>
+
+    <div class="bloco">
+      <h2 style="margin-bottom:6px">Criança</h2>
+      <p class="dica" style="margin:0 0 14px">Não registre nome, Cartão SUS, CPF, filiação ou endereço. A criança é identificada por um código gerado a partir do local do atendimento e do seu CRO.</p>
+      <div class="grade">
+        <label class="campo">Data de nascimento<input type="date" data-campo="crianca.nascimento"></label>
+        <label class="campo">Sexo<select data-campo="crianca.sexo"><option value="">Não informado</option><option value="F">Feminino</option><option value="M">Masculino</option></select></label>
+        <div class="campo">Idade no exame<output id="idade" style="font-size:1rem;color:var(--ink);padding:10px 0">Informe a data de nascimento</output></div>
+        <div class="campo">Código da criança<output id="codigo" style="font-size:1rem;color:var(--ink);padding:10px 0;font-weight:700"></output></div>
+      </div>
+    </div>
+
+    <div class="bloco">
+      <div class="bloco-topo">
+        <h2>Odontograma</h2>
+        <div class="seg" role="group" aria-label="Dentição" id="segDenticao">
+          <button data-den="decidua">Decídua</button><button data-den="mista">Mista</button><button data-den="permanente">Permanente</button>
+        </div>
+      </div>
+      <p class="dica" id="dicaFerr"></p>
+      <div id="paleta" style="margin-top:10px"></div>
+      <div class="odonto"><div class="odonto-in" id="odonto"></div></div>
+    </div>
+
+    <div class="bloco">
+      <h2 style="margin-bottom:12px">Condições gerais e procedimentos</h2>
+      <div class="linha-opcoes">
+        <div class="opcao"><span>Placa visível</span><div class="seg" role="group" aria-label="Placa visível" data-bool="placa"><button data-v="0">Não</button><button data-v="1">Sim</button></div></div>
+        <div class="opcao"><span>Gengivite (sangramento gengival)</span><div class="seg" role="group" aria-label="Gengivite" data-bool="gengivite"><button data-v="0">Não</button><button data-v="1">Sim</button></div></div>
+      </div>
+      <h4 style="margin:18px 0 4px;font-size:.95rem">Procedimentos coletivos e de boca toda realizados</h4>
+      <div class="checks" id="gerais"></div>
+      <label class="campo largo" style="margin-top:14px">Observações do exame<textarea data-campo="observacoes" placeholder="Sem dados que identifiquem a criança"></textarea></label>
+    </div>
+  </section>
+
+  <!-- LISTA -->
+  <section id="aba-lista" hidden>
+    <div class="bloco">
+      <div class="bloco-topo"><h2>Exames salvos neste aparelho</h2></div>
+      <p class="dica" id="listaResumo"></p>
+      <div class="lista-topo" style="margin-top:12px">
+        <button class="prim" id="enviarTudo">Enviar pendentes</button>
+        <button class="sec" id="csvExames">Baixar exames (CSV)</button>
+        <button class="sec" id="csvDentes">Baixar dentes (CSV)</button>
+        <button class="sec" id="reenviarTodos">Reenviar todos</button>
+      </div>
+      <div id="lista"></div>
+    </div>
+  </section>
+
+  <!-- PAINEL -->
+  <section id="aba-painel" hidden>
+    <div class="bloco">
+      <div class="bloco-topo">
+        <h2>Painel</h2>
+        <div class="seg" role="group" aria-label="O que mostrar" id="segVisao"><button data-visao="geral">Geral</button><button data-visao="dsei">Por DSEI</button><button data-visao="minha">Minha produção</button></div>
+      </div>
+      <div class="grade">
+        <label class="campo" id="campoPDsei">DSEI<select id="pDsei"></select></label>
+        <label class="campo">Período<select id="pPeriodo"><option value="30">Últimos 30 dias</option><option value="90">Últimos 3 meses</option><option value="ano" selected>Este ano</option><option value="tudo">Todo o período</option></select></label>
+        <div class="campo" style="justify-content:flex-end"><button class="sec" id="pAtualizar">Atualizar</button></div>
+      </div>
+      <p class="dica" id="pExplica" style="margin-top:12px"></p>
+      <p class="dica" id="pStatus" style="margin-top:6px"></p>
+    </div>
+    <div id="pConteudo"></div>
+  </section>
+
+  <!-- CONFIG -->
+  <section id="aba-config" hidden>
+    <div class="bloco cad-intro">
+      <h2 style="margin-bottom:6px">Seu cadastro</h2>
+      <p class="dica">Preencha uma vez neste aparelho. Seus dados acompanham cada exame que você salvar, e o local de atendimento já vem preenchido nos exames novos.</p>
+      <p class="cad-status" id="cadStatus"></p>
+    </div>
+    <div class="bloco">
+      <h2 style="margin-bottom:12px">Seus dados</h2>
+      <div class="grade">
+        <label class="campo">Nome completo (obrigatório)<input data-cfg="nome" autocomplete="name"></label>
+        <label class="campo">CRO (obrigatório)<input data-cfg="cro" inputmode="numeric" placeholder="Só o número, ex.: 4521"></label>
+        <label class="campo">Município<input data-cfg="municipio"></label>
+      </div>
+    </div>
+    <div class="bloco">
+      <h2 style="margin-bottom:6px">Onde você atende</h2>
+      <p class="dica" style="margin-bottom:12px">Se um dia atender em outro lugar, é só mudar no próprio exame.</p>
+      <div class="grade">
+        <label class="campo">UF (obrigatório)<select data-cfg="uf" class="lista-uf"></select></label>
+        <label class="campo">DSEI (obrigatório)<select data-cfg="dsei" id="cfgDsei"></select></label>
+        <label class="campo">Polo base mais usado<input data-cfg="polo"></label>
+      </div>
+    </div>
+    <div class="bloco">
+      <h2 style="margin-bottom:6px">Envio para o banco de dados</h2>
+      <p class="dica" style="margin-bottom:12px">Endereço e chave fornecidos pela coordenação. Sem eles, os exames ficam guardados apenas neste aparelho e o painel dos DSEIs não aparece.</p>
+      <div class="grade">
+        <label class="campo largo">Endereço de envio<input data-cfg="url" inputmode="url" placeholder="https://script.google.com/macros/s/.../exec"><span class="perigo" id="urlAviso" hidden>Este não é o endereço de implantação. Ele deve começar com https://script.google.com/macros/s/ e terminar em /exec. Copie em Implantar > Gerenciar implantações.</span></label>
+        <label class="campo">Chave de acesso<input data-cfg="chave" autocomplete="off"></label>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="sec" id="testar">Testar conexão</button><span class="dica" id="testeRes"></span></div>
+    </div>
+    <div class="bloco">
+      <h2 style="margin-bottom:6px">Classificação de risco</h2>
+      <p class="dica" style="margin-bottom:12px">A letra (A a F) segue os critérios de atividade de doença usados na atenção básica do SUS. Escolha como as letras são agrupadas em nível de risco, conforme o protocolo da coordenação.</p>
+      <div class="seg" role="group" aria-label="Agrupamento de risco" id="segAgrup">
+        <button data-ag="dois">Baixo (A–C) e alto (D–F)</button><button data-ag="tres">Baixo (A–B), moderado (C–D), alto (E–F)</button>
+      </div>
+    </div>
+    <div class="cad-acoes"><button class="prim" id="irExame">Salvar cadastro e ir para o exame</button></div>
+  </section>
+</main>
+
+<footer class="resultado" id="resultado">
+  <div class="res-in">
+    <div class="classe" id="resClasse" data-c="A">A</div>
+    <div class="res-txt"><strong id="resRisco">Baixo risco</strong><span id="resDesc"></span><button class="link" id="verMotivos" aria-expanded="false">Ver motivos</button></div>
+    <div class="indices"><div><b id="resCeod">0</b>ceo-d</div><div><b id="resCpod">0</b>CPO-D</div></div>
+    <div class="res-acoes"><button class="prim" id="salvar">Salvar exame</button></div>
+  </div>
+  <ul class="motivos" id="motivos" hidden></ul>
+</footer>
+
+<div class="fundo" id="fundo" hidden></div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+"use strict";
+/* ---------- armazenamento ---------- */
+const memoria = {};
+let armazenamentoOk = true;
+try { localStorage.setItem("__t","1"); localStorage.removeItem("__t"); } catch (e) { armazenamentoOk = false; }
+const store = {
+  get(k, def) {
+    try { const v = localStorage.getItem(k); if (v != null) return JSON.parse(v); } catch (e) {}
+    return k in memoria ? memoria[k] : def;
+  },
+  set(k, v) { memoria[k] = v; try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+};
+const K_EXAMES = "odonto.exames.v1", K_CFG = "odonto.config.v1", K_RASC = "odonto.rascunho.v1", K_PAINEL = "odonto.painel.v1";
+const K_SEQ = "odonto.seq.v1";
+const UFS = ["AC", "AL", "AM", "AP", "BA", "CE", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PR", "RO", "RR", "SC", "SE", "TO"];
+const DSEI_UF = {"AC": ["Alto Rio Juruá", "Alto Rio Purus"], "AL": ["Alagoas e Sergipe"], "AM": ["Alto Rio Negro", "Alto Rio Purus", "Alto Rio Solimões", "Manaus", "Médio Rio Purus", "Médio Rio Solimões e Afluentes", "Parintins", "Vale do Javari", "Yanomami"], "AP": ["Amapá e Norte do Pará"], "BA": ["Bahia"], "CE": ["Ceará"], "MA": ["Maranhão"], "MG": ["Minas Gerais e Espírito Santo"], "MS": ["Mato Grosso do Sul"], "MT": ["Araguaia", "Cuiabá", "Kaiapó do Mato Grosso", "Xavante", "Xingu"], "PA": ["Altamira", "Amapá e Norte do Pará", "Guamá-Tocantins", "Kaiapó do Pará", "Rio Tapajós"], "PB": ["Potiguara"], "PE": ["Pernambuco"], "PR": ["Interior Sul", "Litoral Sul"], "RO": ["Porto Velho", "Vilhena"], "RR": ["Leste de Roraima", "Yanomami"], "SC": ["Interior Sul", "Litoral Sul"], "SE": ["Alagoas e Sergipe"], "TO": ["Araguaia", "Tocantins"]};
+const DSEIS = ["Alagoas e Sergipe", "Altamira", "Alto Rio Juruá", "Alto Rio Negro", "Alto Rio Purus", "Alto Rio Solimões", "Amapá e Norte do Pará", "Araguaia", "Bahia", "Ceará", "Cuiabá", "Guamá-Tocantins", "Interior Sul", "Kaiapó do Mato Grosso", "Kaiapó do Pará", "Leste de Roraima", "Litoral Sul", "Manaus", "Maranhão", "Mato Grosso do Sul", "Minas Gerais e Espírito Santo", "Médio Rio Purus", "Médio Rio Solimões e Afluentes", "Parintins", "Pernambuco", "Porto Velho", "Potiguara", "Rio Tapajós", "Tocantins", "Vale do Javari", "Vilhena", "Xavante", "Xingu", "Yanomami"];
+
+/* ---------- remove identificação de exames antigos deste aparelho ---------- */
+(function limparIdentificacao() {
+  const so = c => ({nascimento: (c && c.nascimento) || "", sexo: (c && c.sexo) || ""});
+  const tem = c => c && ("nome" in c || "identificador" in c || "escola" in c || "turma" in c);
+  const l = store.get(K_EXAMES, []); let mudou = false;
+  l.forEach(e => { if (tem(e.crianca)) { e.crianca = so(e.crianca); e.envio = {estado: "pendente", tentativas: 0}; mudou = true; } });
+  if (mudou) store.set(K_EXAMES, l);
+  const r = store.get(K_RASC, null);
+  if (r && tem(r.crianca)) { r.crianca = so(r.crianca); store.set(K_RASC, r); }
+})();
+
+/* ---------- dados de referência ---------- */
+const PERM = {1:[18,17,16,15,14,13,12,11],2:[21,22,23,24,25,26,27,28],3:[31,32,33,34,35,36,37,38],4:[48,47,46,45,44,43,42,41]};
+const DEC  = {5:[55,54,53,52,51],6:[61,62,63,64,65],7:[71,72,73,74,75],8:[85,84,83,82,81]};
+const FACES = [
+  {k:"",     nome:"Hígida"},
+  {k:"ca",   nome:"Cárie ativa (cavidade)",       estilo:"fill:var(--carie)"},
+  {k:"cc",   nome:"Cárie crônica (cavidade)",     estilo:"fill:var(--carie-cr)"},
+  {k:"mba",  nome:"Mancha branca ativa",          estilo:"fill:var(--mba)"},
+  {k:"mbi",  nome:"Mancha branca inativa",        estilo:"fill:var(--mbi)"},
+  {k:"rest", nome:"Restaurada",                   estilo:"fill:var(--rest)"},
+  {k:"restc",nome:"Restaurada com cárie",         estilo:"fill:url(#pRestC)"},
+  {k:"sel",  nome:"Selante",                      estilo:"fill:var(--sel)"}
+];
+const FACE_NOME = Object.fromEntries(FACES.map(f => [f.k, f.nome]));
+const STATUS = [
+  {k:"presente",      nome:"Presente"},
+  {k:"nao_erupc",     nome:"Não erupcionado"},
+  {k:"ausente",       nome:"Ausente (esfoliado ou outro motivo)"},
+  {k:"ausente_carie", nome:"Extraído por cárie"},
+  {k:"extr_ind",      nome:"Extração indicada"},
+  {k:"raiz",          nome:"Raiz residual"}
+];
+const STATUS_NOME = Object.fromEntries(STATUS.map(s => [s.k, s.nome]));
+const PROCS = [
+  ["selante","Selante"],["art","ART (restauração atraumática)"],["civ","Restauração em ionômero de vidro"],
+  ["resina","Restauração em resina"],["amalgama","Restauração em amálgama"],["verniz","Verniz fluoretado"],
+  ["cdf","Cariostático (diamino fluoreto de prata)"],["selprov","Selamento provisório / adequação do meio"],
+  ["pulpotomia","Pulpotomia"],["pulpectomia","Pulpectomia"],["coroa","Coroa de aço"],["exodontia","Exodontia"]
+];
+const PROC_NOME = Object.fromEntries(PROCS);
+const GERAIS = ["Escovação supervisionada","Aplicação tópica de flúor","Orientação de higiene e dieta","Profilaxia / remoção de placa","Raspagem supragengival","Encaminhamento para especialidade"];
+const CLASSES = {
+  A:"Sem lesão de cárie, sem placa, sem gengivite e sem mancha branca ativa.",
+  B:"História de dente restaurado ou perdido por cárie, sem sinais de atividade.",
+  C:"Uma ou mais cavidades em lesão crônica, sem placa, gengivite ou mancha branca ativa.",
+  D:"Placa, gengivite e/ou mancha branca ativa, sem cavidade ativa.",
+  E:"Uma ou mais cavidades em lesão ativa.",
+  F:"Presença de dor e/ou abscesso."
+};
+const FERRAMENTAS = [
+  {grupo:"Selecionar", itens:[{k:"detalhe", nome:"Detalhar dente", am:'<span class="amostra">⋯</span>'}]},
+  {grupo:"Marcar face", itens:FACES.filter(f=>f.k).map(f => ({k:"f:"+f.k, nome:f.nome, am:`<span class="amostra" style="background:${f.k==="restc"?"repeating-linear-gradient(45deg,var(--rest) 0 4px,var(--carie) 4px 7px)":f.estilo.replace("fill:","")}"></span>`}))},
+  {grupo:"Marcar dente", itens:[
+    {k:"s:presente", nome:"Presente", am:'<span class="amostra"></span>'},
+    {k:"s:nao_erupc", nome:"Não erupcionado", am:'<span class="amostra" style="border-style:dashed;background:transparent"></span>'},
+    {k:"s:ausente", nome:"Ausente", am:'<span class="amostra" style="color:#6D8594">✕</span>'},
+    {k:"s:ausente_carie", nome:"Extraído por cárie", am:'<span class="amostra" style="color:var(--rest)">✕</span>'},
+    {k:"s:extr_ind", nome:"Extração indicada", am:'<span class="amostra" style="color:var(--carie)">✕</span>'},
+    {k:"s:raiz", nome:"Raiz residual", am:'<span class="amostra" style="color:var(--carie)">R</span>'},
+    {k:"dor", nome:"Dor ou abscesso", am:'<span class="amostra" style="background:var(--dor);color:#fff;border-radius:50%">!</span>'},
+    {k:"apagar", nome:"Limpar dente", am:'<span class="amostra">⌫</span>'}
+  ]}
+];
+
+/* ---------- utilidades ---------- */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const hoje = () => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0,10); };
+const uid = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2));
+const clone = o => JSON.parse(JSON.stringify(o));
+const quad = n => Math.floor(n / 10);
+const ehDecid = n => quad(n) >= 5;
+const ehSup = n => [1,2,5,6].includes(quad(n));
+const ladoDireitoPac = n => [1,4,5,8].includes(quad(n));
+const ehAnterior = n => (n % 10) <= 3;
+const fmtData = iso => iso ? iso.slice(0,10).split("-").reverse().join("/") : "";
+
+function nomeDente(n) {
+  const p = n % 10, d = ehDecid(n);
+  const nomesP = ["","incisivo central","incisivo lateral","canino","primeiro pré-molar","segundo pré-molar","primeiro molar","segundo molar","terceiro molar"];
+  const nomesD = ["","incisivo central","incisivo lateral","canino","primeiro molar","segundo molar"];
+  const lado = {1:"superior direito",2:"superior esquerdo",3:"inferior esquerdo",4:"inferior direito"}[d ? quad(n) - 4 : quad(n)];
+  return (d ? nomesD[p] + " decíduo " : nomesP[p] + " permanente ") + lado;
+}
+function rotuloFace(n, f) {
+  if (f === "O") return ehAnterior(n) ? "Incisal" : "Oclusal";
+  if (f === "V") return "Vestibular";
+  if (f === "L") return ehSup(n) ? "Palatina" : "Lingual";
+  return f === "M" ? "Mesial" : "Distal";
+}
+function mapaFaces(n) {
+  const s = ehSup(n), dp = ladoDireitoPac(n);
+  return {top: s ? "V" : "L", bottom: s ? "L" : "V", left: dp ? "D" : "M", right: dp ? "M" : "D"};
+}
+function linhas(den) {
+  const sup  = {l:PERM[1], r:PERM[2], tipo:"perm", arco:"sup"};
+  const supD = {l:DEC[5],  r:DEC[6],  tipo:"dec",  arco:"sup"};
+  const infD = {l:DEC[8],  r:DEC[7],  tipo:"dec",  arco:"inf"};
+  const inf  = {l:PERM[4], r:PERM[3], tipo:"perm", arco:"inf"};
+  if (den === "permanente") return [sup, inf];
+  if (den === "decidua") return [supD, infD];
+  return [sup, supD, infD, inf];
+}
+const dentesDe = den => linhas(den).flatMap(l => [...l.l, ...l.r]);
+const facesVazias = () => ({O:"",M:"",D:"",V:"",L:""});
+const denteNovo = (n, den) => ({status: (den === "mista" && !ehDecid(n)) ? "nao_erupc" : "presente", faces: facesVazias(), dor:false, procs:{}, obs:""});
+
+function idadeEm(nasc, ref) {
+  if (!nasc) return null;
+  const a = new Date(nasc + "T12:00:00"), b = new Date((ref || hoje()) + "T12:00:00");
+  if (isNaN(a) || isNaN(b) || b < a) return null;
+  let meses = (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth());
+  if (b.getDate() < a.getDate()) meses--;
+  return {anos: Math.floor(meses / 12), meses: meses % 12, decimal: +(meses / 12).toFixed(1)};
+}
+
+/* ---------- configuração ---------- */
+const cfgPadrao = {nome:"", cro:"", municipio:"", uf:"", dsei:"", polo:"", url:"", chave:"", agrupamento:"dois"};
+const cfg = () => Object.assign({}, cfgPadrao, store.get(K_CFG, {}));
+function salvarCfg(parcial) { store.set(K_CFG, Object.assign(cfg(), parcial)); }
+function cadastroFaltando() {
+  const c = cfg(), f = [];
+  if (!c.nome) f.push(["nome", "nome"]); if (!c.cro) f.push(["cro", "CRO"]);
+  if (!c.uf) f.push(["uf", "UF"]); if (!c.dsei) f.push(["dsei", "DSEI"]);
+  return f;
+}
+const listaE = a => a.length > 1 ? a.slice(0, -1).join(", ") + " e " + a.at(-1) : a.join("");
+function renderCadStatus() {
+  const f = cadastroFaltando(), c = cfg(), el = $("#cadStatus");
+  el.className = "cad-status " + (f.length ? "falta" : "ok");
+  el.textContent = f.length ? `Falta preencher: ${listaE(f.map(x => x[1]))}.`
+    : `Cadastro completo. Os exames serão salvos em nome de ${c.nome}, CRO ${c.cro}, DSEI ${c.dsei}.` + (c.url && c.chave ? "" : " Ainda falta o endereço de envio e a chave para mandar os exames ao banco de dados.");
+}
+const croCod = cro => { const t = String(cro || ""); const d = t.replace(/\D/g, ""); return d || t.replace(/[^0-9A-Za-z]/g, "").toUpperCase(); };
+function preencherDsei(sel, uf, valor) {
+  const lista = uf ? (DSEI_UF[uf] || []) : [];
+  sel.innerHTML = `<option value="">${uf ? "Escolha o DSEI" : "Escolha a UF primeiro"}</option>` + lista.map(d => `<option>${esc(d)}</option>`).join("");
+  sel.value = lista.includes(valor) ? valor : "";
+}
+const tres = t => String(t || "").replace(/\s/g, "").slice(0, 3).toUpperCase();
+function codigoDe(ex, seq) {
+  const n = seq || ex.seq;
+  return `${(ex.uf || "").toUpperCase()}-${tres(ex.polo)}-${tres(ex.aldeia)}-${ex.croCod || croCod(cfg().cro) || "CRO"}-${n ? String(n).padStart(4, "0") : "????"}`;
+}
+function renderCodigo() {
+  const ex = estado.ex, el = $("#codigo");
+  if (!ex.uf || !(ex.polo || "").trim() || !(ex.aldeia || "").trim()) { el.textContent = "Preencha UF, polo base e aldeia"; return; }
+  el.textContent = ex.seq ? codigoDe(ex) : codigoDe(ex, store.get(K_SEQ, 0) + 1);
+}
+
+/* ---------- estado ---------- */
+function novoExame() {
+  const c = cfg();
+  return {id: uid(), criadoEm: new Date().toISOString(), dataExame: hoje(), uf: c.uf || "", dsei: c.dsei || "", polo: c.polo || "", aldeia: "", seq: null, croCod: "",
+    crianca: {nascimento:"", sexo:""},
+    denticao: "mista", placa:false, gengivite:false, gerais:[], observacoes:"", dentes:{}, _tocado:false};
+}
+function garantirDentes(ex) { for (const n of dentesDe(ex.denticao)) if (!ex.dentes[n]) ex.dentes[n] = denteNovo(n, ex.denticao); }
+const estado = {ex: store.get(K_RASC, null) || novoExame(), editando: null, ferr: "detalhe", sel: null, aba: "exame", enviando: false};
+if (estado.ex._editando) estado.editando = estado.ex._editando;
+garantirDentes(estado.ex);
+let tRasc;
+function alterado() { estado.ex._tocado = true; clearTimeout(tRasc); tRasc = setTimeout(() => store.set(K_RASC, Object.assign(estado.ex, {_editando: estado.editando})), 300); }
+
+/* ---------- avaliação: classe de risco e índices ---------- */
+function avaliar(ex) {
+  const nums = dentesDe(ex.denticao);
+  const F = [], E = [], Dm = [], C = [], B = [];
+  const ceod = {c:0,e:0,o:0,total:0}, cpod = {c:0,p:0,o:0,total:0};
+  for (const n of nums) {
+    const d = ex.dentes[n]; if (!d) continue;
+    const fs = Object.values(d.faces);
+    const presente = !["nao_erupc","ausente","ausente_carie"].includes(d.status);
+    if (d.dor) F.push(n);
+    if (presente && (fs.includes("ca") || fs.includes("restc"))) E.push(n);
+    if (presente && fs.includes("mba")) Dm.push(n);
+    if (presente && (fs.includes("cc") || d.status === "raiz" || d.status === "extr_ind")) C.push(n);
+    if ((presente && (fs.includes("rest") || fs.includes("mbi"))) || d.status === "ausente_carie") B.push(n);
+    // índices (cada dente conta uma vez: extraído/indicado > cariado > obturado)
+    const cariado = presente && (fs.some(f => ["ca","cc","restc"].includes(f)) || d.status === "raiz");
+    const perdido = d.status === "extr_ind" || d.status === "ausente_carie";
+    const obturado = presente && fs.includes("rest") && !cariado;
+    const alvo = ehDecid(n) ? ceod : cpod;
+    if (perdido) alvo[ehDecid(n) ? "e" : "p"]++;
+    else if (cariado) alvo.c++;
+    else if (obturado) alvo.o++;
+  }
+  ceod.total = ceod.c + ceod.e + ceod.o; cpod.total = cpod.c + cpod.p + cpod.o;
+  const lista = a => a.join(", ");
+  const motivos = [];
+  if (F.length) motivos.push(`Dor ou abscesso: ${lista(F)}`);
+  if (E.length) motivos.push(`Cavidade ativa: ${lista(E)}`);
+  if (Dm.length) motivos.push(`Mancha branca ativa: ${lista(Dm)}`);
+  if (ex.placa) motivos.push("Placa visível");
+  if (ex.gengivite) motivos.push("Gengivite");
+  if (C.length) motivos.push(`Cavidade crônica, raiz residual ou extração indicada: ${lista(C)}`);
+  if (B.length) motivos.push(`Restauração, mancha inativa ou extração por cárie: ${lista(B)}`);
+  let classe = "A";
+  if (F.length) classe = "F";
+  else if (E.length) classe = "E";
+  else if (Dm.length || ex.placa || ex.gengivite) classe = "D";
+  else if (C.length) classe = "C";
+  else if (B.length) classe = "B";
+  if (!motivos.length) motivos.push("Nenhuma alteração registrada");
+  return {classe, descricao: CLASSES[classe], risco: nivelRisco(classe), motivos, ceod, cpod};
+}
+function nivelRisco(c) {
+  if (cfg().agrupamento === "tres") return "ABCDEF".indexOf(c) < 2 ? "Baixo risco" : "ABCDEF".indexOf(c) < 4 ? "Risco moderado" : "Alto risco";
+  return "ABC".includes(c) ? "Baixo risco" : "Alto risco";
+}
+
+/* ---------- desenho do dente ---------- */
+const POL = {top:"2,2 38,2 27,13 13,13", bottom:"13,27 27,27 38,38 2,38", left:"2,2 13,13 13,27 2,38", right:"38,2 38,38 27,27 27,13"};
+const estiloFace = k => (FACES.find(f => f.k === k) || {}).estilo || "";
+function svgDente(n, d, extra) {
+  const m = mapaFaces(n);
+  let s = `<svg viewBox="0 0 40 40" class="st-${d.status}" ${extra || ""} aria-hidden="true">`;
+  for (const pos of ["top","bottom","left","right"]) s += `<polygon class="face" data-face="${m[pos]}" points="${POL[pos]}" style="${estiloFace(d.faces[m[pos]])}"/>`;
+  s += `<rect class="face" data-face="O" x="13" y="13" width="14" height="14" style="${estiloFace(d.faces.O)}"/>`;
+  const X = cor => `<g class="ov" stroke="${cor}" stroke-width="3.5" stroke-linecap="round"><line x1="5" y1="5" x2="35" y2="35"/><line x1="35" y1="5" x2="5" y2="35"/></g>`;
+  if (d.status === "ausente") s += X("#6D8594");
+  if (d.status === "ausente_carie") s += X("#2F67D8");
+  if (d.status === "extr_ind") s += X("#D7263D");
+  if (d.status === "raiz") s += `<text class="ov" x="20" y="27" text-anchor="middle" font-size="19" font-weight="700" fill="#D7263D" stroke="#fff" stroke-width="3" paint-order="stroke">R</text>`;
+  if (d.dor) s += `<g class="ov"><circle cx="36" cy="4" r="6" fill="#E07A1F" stroke="#fff" stroke-width="1.5"/><text x="36" y="8" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">!</text></g>`;
+  const temProc = Object.values(d.procs || {}).some(v => v === "realizado");
+  if (temProc) s += `<circle class="ov" cx="4" cy="36" r="4" fill="#0E6E73" stroke="#fff" stroke-width="1.5"/>`;
+  return s + "</svg>";
+}
+
+/* ---------- renderização: exame ---------- */
+function renderPaleta() {
+  $("#paleta").innerHTML = FERRAMENTAS.map(g => `<div class="paleta-grupo"><span class="paleta-rot">${g.grupo}</span>${
+    g.itens.map(i => `<button class="ferr" data-ferr="${i.k}" aria-pressed="${estado.ferr === i.k}">${i.am}${esc(i.nome)}</button>`).join("")}</div>`).join("");
+  const f = estado.ferr;
+  $("#dicaFerr").textContent = f === "detalhe"
+    ? "Toque em um dente para registrar situação, faces e procedimentos. Ou escolha uma marcação abaixo e toque nos dentes para aplicá-la rapidamente."
+    : f.startsWith("f:") ? `Toque na face do dente para marcar “${FACE_NOME[f.slice(2)]}”. Toque de novo para desfazer. O número do dente abre os detalhes.`
+    : "Toque no dente para aplicar a marcação. Toque de novo para desfazer. O número do dente abre os detalhes.";
+}
+function celula(n) {
+  const d = estado.ex.dentes[n], sup = ehSup(n);
+  const num = `<button class="num" aria-label="Detalhar dente ${n}">${n}</button>`;
+  return `<div class="dente ${ehDecid(n) ? "dec" : "perm"} ${estado.sel === n ? "ativo" : ""}" data-n="${n}" title="${n}: ${esc(nomeDente(n))}">${sup ? num : ""}${svgDente(n, d)}${sup ? "" : num}</div>`;
+}
+function renderOdonto() {
+  const ex = estado.ex; garantirDentes(ex);
+  const ls = linhas(ex.denticao);
+  $("#odonto").innerHTML = `<div class="legenda-arcos"><span>Direito do paciente</span><span>Esquerdo do paciente</span></div>` +
+    ls.map((l, i) => {
+      const corte = l.arco === "inf" && i > 0 && ls[i-1].arco === "sup";
+      return `<div class="arcada ${l.tipo} ${l.arco}${corte ? " corte" : ""}"><div class="quad dir">${l.l.map(celula).join("")}</div><div class="quad esq">${l.r.map(celula).join("")}</div></div>`;
+    }).join("");
+  $$("#segDenticao button").forEach(b => b.setAttribute("aria-pressed", b.dataset.den === ex.denticao));
+}
+function renderResultado() {
+  const r = avaliar(estado.ex);
+  const el = $("#resClasse"); el.textContent = r.classe; el.dataset.c = r.classe;
+  $("#resRisco").textContent = `Classe ${r.classe}: ${r.risco.toLowerCase()}`;
+  $("#resDesc").textContent = r.descricao;
+  const temDec = estado.ex.denticao !== "permanente", temPerm = estado.ex.denticao !== "decidua";
+  $("#resCeod").textContent = temDec ? r.ceod.total : "–";
+  $("#resCpod").textContent = temPerm ? r.cpod.total : "–";
+  $("#motivos").innerHTML = r.motivos.map(m => `<li>${esc(m)}</li>`).join("") +
+    (temDec ? `<li>ceo-d ${r.ceod.total} (c ${r.ceod.c}, e ${r.ceod.e}, o ${r.ceod.o})</li>` : "") +
+    (temPerm ? `<li>CPO-D ${r.cpod.total} (C ${r.cpod.c}, P ${r.cpod.p}, O ${r.cpod.o})</li>` : "");
+  $("#salvar").textContent = estado.editando ? "Salvar alterações" : "Salvar exame";
+}
+function renderFormulario() {
+  const ex = estado.ex;
+  preencherDsei($("#exDsei"), ex.uf, ex.dsei);
+  $$("[data-campo]").forEach(i => { const v = i.dataset.campo.split(".").reduce((o, k) => o && o[k], ex); i.value = v == null ? "" : v; });
+  renderCodigo();
+  $$("[data-bool]").forEach(g => g.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", (b.dataset.v === "1") === !!ex[g.dataset.bool])));
+  $("#gerais").innerHTML = GERAIS.map((g, i) => `<label class="check"><input type="checkbox" data-geral="${i}" ${ex.gerais.includes(g) ? "checked" : ""}>${esc(g)}</label>`).join("");
+  renderIdade();
+  $("#avisoEdicao").hidden = !estado.editando;
+  const c = cfg(); $("#avisoConfig").hidden = !cadastroFaltando().length;
+  $("#profLinha").innerHTML = c.nome ? `Profissional: <b>${esc(c.nome)}</b>, CRO ${esc(c.cro || "não informado")} <button class="link" data-ir="config">Alterar cadastro</button>` : "";
+}
+function renderIdade() {
+  const id = idadeEm(estado.ex.crianca.nascimento, estado.ex.dataExame);
+  $("#idade").textContent = id ? `${id.anos} ${id.anos === 1 ? "ano" : "anos"} e ${id.meses} ${id.meses === 1 ? "mês" : "meses"}` : "Informe a data de nascimento";
+}
+function renderExame() { renderFormulario(); renderPaleta(); renderOdonto(); renderResultado(); }
+
+/* ---------- painel do dente ---------- */
+function abrirPainel(n) { estado.sel = n; renderPainel(); $("#fundo").hidden = false; renderOdonto(); document.body.style.overflow = "hidden"; setTimeout(() => $(".painel .fechar")?.focus(), 30); }
+function fecharPainel() { const n = estado.sel; estado.sel = null; $("#fundo").hidden = true; $("#fundo").innerHTML = ""; document.body.style.overflow = ""; renderOdonto(); document.querySelector(`.dente[data-n="${n}"] .num`)?.focus(); }
+function renderPainel(focoSel) {
+  const n = estado.sel, d = estado.ex.dentes[n];
+  const semFaces = ["nao_erupc","ausente","ausente_carie","raiz"].includes(d.status);
+  const rolagem = $(".painel")?.scrollTop || 0;
+  $("#fundo").innerHTML = `<div class="painel" role="dialog" aria-modal="true" aria-labelledby="pTit">
+    <div class="p-topo">${svgDente(n, d)}<div><h3 id="pTit">Dente ${n}</h3><p>${esc(nomeDente(n))}</p></div><button class="fechar" data-acao="fechar" aria-label="Fechar">×</button></div>
+    <h4>Situação do dente</h4>
+    <div class="chips">${STATUS.map(s => `<button class="chip" data-status="${s.k}" aria-pressed="${d.status === s.k}">${esc(s.nome)}</button>`).join("")}</div>
+    <h4>Faces</h4>
+    ${semFaces ? `<p class="dica">Faces não se aplicam a dente ${esc(STATUS_NOME[d.status].toLowerCase())}.</p>` : `<div class="faces">${["O","V","L","M","D"].map(f =>
+      `<label class="campo">${rotuloFace(n, f)}<select data-facesel="${f}">${FACES.map(o => `<option value="${o.k}" ${d.faces[f] === o.k ? "selected" : ""}>${esc(o.nome)}</option>`).join("")}</select></label>`).join("")}</div>`}
+    <label class="check" style="margin-top:10px"><input type="checkbox" data-dor ${d.dor ? "checked" : ""}>Dor, abscesso ou fístula associados a este dente</label>
+    <h4>Procedimentos</h4>
+    <div>${PROCS.map(([k, nome]) => `<div class="proc"><span>${esc(nome)}</span><div class="seg pequeno" role="group" aria-label="${esc(nome)}">${
+      [["","Não"],["indicado","Indicado"],["realizado","Realizado"]].map(([v, r]) => `<button data-proc="${k}" data-val="${v}" aria-pressed="${(d.procs[k] || "") === v}">${r}</button>`).join("")}</div></div>`).join("")}</div>
+    <label class="campo" style="margin-top:14px">Observação sobre o dente<textarea data-obs placeholder="Sem dados que identifiquem a criança">${esc(d.obs)}</textarea></label>
+    <div class="p-acoes"><button class="sec" data-acao="limpar">Limpar marcações do dente</button><button class="prim" data-acao="fechar">Concluir</button></div>
+  </div>`;
+  const p = $(".painel"); p.scrollTop = rolagem;
+  if (focoSel) p.querySelector(focoSel)?.focus();
+}
+function mudouDente() { alterado(); renderOdonto(); renderResultado(); }
+
+/* ---------- aplicar ferramenta ---------- */
+function aplicarFerr(n, face) {
+  const f = estado.ferr, d = estado.ex.dentes[n];
+  if (f === "detalhe") return abrirPainel(n);
+  if (f === "apagar") { estado.ex.dentes[n] = Object.assign(denteNovo(n, ""), {status:"presente"}); }
+  else if (f.startsWith("f:")) {
+    if (!face) return abrirPainel(n);
+    const c = f.slice(2);
+    if (!["presente","extr_ind"].includes(d.status)) d.status = "presente";
+    d.faces[face] = d.faces[face] === c ? "" : c;
+  } else if (f.startsWith("s:")) {
+    const s = f.slice(2);
+    d.status = (d.status === s && s !== "presente") ? "presente" : s;
+    if (["ausente","ausente_carie","nao_erupc"].includes(d.status)) { d.faces = facesVazias(); d.dor = false; }
+    if (d.status === "raiz") d.faces = facesVazias();
+  } else if (f === "dor") {
+    d.dor = !d.dor;
+    if (d.dor && ["ausente","ausente_carie","nao_erupc"].includes(d.status)) d.status = "presente";
+  }
+  mudouDente();
+}
+
+/* ---------- salvar / lista ---------- */
+const exames = () => store.get(K_EXAMES, []);
+const gravarExames = l => { store.set(K_EXAMES, l); atualizarRede(); };
+
+function montarRegistro(ex) {
+  const c = cfg(), r = avaliar(ex), idade = idadeEm(ex.crianca.nascimento, ex.dataExame);
+  const dentes = {}; for (const n of dentesDe(ex.denticao)) dentes[n] = clone(ex.dentes[n]);
+  return {id: ex.id, versao: 1, criadoEm: ex.criadoEm, atualizadoEm: new Date().toISOString(), dataExame: ex.dataExame,
+    profissional: {nome: c.nome, cro: c.cro}, municipio: c.municipio, uf: ex.uf, dsei: ex.dsei, polo: ex.polo.trim(), aldeia: ex.aldeia.trim(), seq: ex.seq, croCod: ex.croCod, codigo: codigoDe(ex),
+    crianca: {nascimento: ex.crianca.nascimento || "", sexo: ex.crianca.sexo || ""}, idadeAnos: idade ? idade.decimal : "", denticao: ex.denticao,
+    placa: ex.placa, gengivite: ex.gengivite, gerais: ex.gerais.slice(), observacoes: ex.observacoes, dentes,
+    resultado: {classe: r.classe, risco: r.risco, descricao: r.descricao, motivos: r.motivos, ceod: r.ceod, cpod: r.cpod, agrupamento: c.agrupamento},
+    envio: {estado: "pendente", tentativas: 0}};
+}
+function salvarExame() {
+  const c = cfg(), ex = estado.ex;
+  if (cadastroFaltando().length) { toast("Complete seu cadastro antes de salvar o exame."); return irAba("config"); }
+  if (!ex.uf || !ex.dsei) { toast("Escolha a UF e o DSEI do atendimento."); return $(ex.uf ? '[data-campo="dsei"]' : '[data-campo="uf"]').focus(); }
+  if (!(ex.polo || "").trim() || !(ex.aldeia || "").trim()) { toast("Informe o polo base e a aldeia ou comunidade."); return $((ex.polo || "").trim() ? '[data-campo="aldeia"]' : '[data-campo="polo"]').focus(); }
+  if (!ex.crianca.nascimento) { toast("Informe a data de nascimento."); return $('[data-campo="crianca.nascimento"]').focus(); }
+  if (!ex.dataExame) { toast("Informe a data do exame."); return $('[data-campo="dataExame"]').focus(); }
+  if (!ex.seq) { const n = store.get(K_SEQ, 0) + 1; store.set(K_SEQ, n); ex.seq = n; }
+  if (!ex.croCod) ex.croCod = croCod(c.cro);
+  const reg = montarRegistro(ex);
+  const lista = exames(), i = lista.findIndex(e => e.id === reg.id);
+  if (i >= 0) { reg.criadoEm = lista[i].criadoEm; lista[i] = reg; } else lista.push(reg);
+  gravarExames(lista);
+  estado.ex = novoExame(); garantirDentes(estado.ex); estado.editando = null; store.set(K_RASC, null);
+  renderExame(); window.scrollTo({top: 0});
+  toast(`Exame ${reg.codigo} salvo (classe ${reg.resultado.classe}).` + (navigator.onLine && c.url ? " Enviando…" : " Será enviado quando houver internet."));
+  sincronizar();
+}
+function abrirExame(id) {
+  const reg = exames().find(e => e.id === id); if (!reg) return;
+  if (estado.ex._tocado && !estado.editando && !confirm("Há um exame em andamento que ainda não foi salvo. Deseja descartá-lo para abrir este?")) return;
+  estado.ex = {id: reg.id, criadoEm: reg.criadoEm, dataExame: reg.dataExame, uf: reg.uf || "", dsei: reg.dsei || "", polo: reg.polo || "", aldeia: reg.aldeia || "", seq: reg.seq || null, croCod: reg.croCod || "", crianca: {nascimento: reg.crianca.nascimento || "", sexo: reg.crianca.sexo || ""}, denticao: reg.denticao,
+    placa: reg.placa, gengivite: reg.gengivite, gerais: reg.gerais.slice(), observacoes: reg.observacoes || "", dentes: clone(reg.dentes), _tocado: true};
+  garantirDentes(estado.ex); estado.editando = id; store.set(K_RASC, Object.assign(clone(estado.ex), {_editando: id}));
+  irAba("exame"); renderExame(); window.scrollTo({top: 0});
+}
+function excluirExame(id) {
+  const reg = exames().find(e => e.id === id); if (!reg) return;
+  const aviso = reg.envio.estado === "enviado" ? "\n\nEle já foi enviado: a cópia no banco de dados continua lá." : "\n\nEle ainda não foi enviado e será perdido.";
+  if (!confirm(`Excluir o exame ${reg.codigo || "sem código"} deste aparelho?` + aviso)) return;
+  gravarExames(exames().filter(e => e.id !== id)); renderLista();
+}
+function renderLista() {
+  const l = exames().slice().sort((a, b) => (b.atualizadoEm || "").localeCompare(a.atualizadoEm || ""));
+  const pend = l.filter(e => e.envio.estado !== "enviado").length, c = cfg();
+  $("#listaResumo").textContent = !l.length ? "" : `${l.length} ${l.length === 1 ? "exame" : "exames"}, ${pend} aguardando envio.` + (c.url ? "" : " O endereço de envio ainda não foi configurado, então os exames ficam apenas neste aparelho.");
+  $("#enviarTudo").disabled = !pend || !c.url || estado.enviando;
+  $("#enviarTudo").textContent = estado.enviando ? "Enviando…" : `Enviar pendentes${pend ? ` (${pend})` : ""}`;
+  $("#csvExames").disabled = $("#csvDentes").disabled = $("#reenviarTodos").disabled = !l.length || !c.url || estado.enviando;
+  const rot = {enviado: "Enviado", pendente: "Aguardando envio", erro: "Erro no envio"};
+  $("#lista").innerHTML = !l.length ? `<div class="vazio">Nenhum exame salvo ainda. Os exames salvos aparecem aqui e ficam guardados mesmo sem internet.</div>` :
+    l.map(e => `<div class="exame">
+      <div class="classe mini" data-c="${e.resultado.classe}">${e.resultado.classe}</div>
+      <div class="info"><strong>${esc(e.codigo || "Exame sem código")}</strong>
+        <span>${fmtData(e.dataExame)}, ${e.idadeAnos !== "" && e.idadeAnos != null ? Math.floor(e.idadeAnos) + " anos, " : ""}${e.crianca.sexo === "F" ? "feminino, " : e.crianca.sexo === "M" ? "masculino, " : ""}${esc(e.aldeia || "sem aldeia")}, ${esc(e.resultado.risco.toLowerCase())}</span>
+        ${e.envio.estado === "erro" ? `<span class="perigo" style="display:block">${esc(e.envio.erro || "")}</span>` : ""}</div>
+      <span class="estado ${e.envio.estado}">${rot[e.envio.estado]}</span>
+      <button class="sec" data-abrir="${e.id}">Abrir</button>
+      <button class="link perigo" data-excluir="${e.id}">Excluir</button></div>`).join("");
+}
+
+/* ---------- linhas para planilha / CSV ---------- */
+const CAB_EXAME = ["id_exame","codigo_anonimizado","data_exame","atualizado_em","profissional","cro","municipio","uf","dsei","polo_base","aldeia_comunidade","nascimento","idade_anos","sexo","denticao","placa_visivel","gengivite","classe_risco","nivel_risco","ceod_c","ceod_e","ceod_o","ceod","cpod_c","cpod_p","cpod_o","cpod","dentes_com_dor_abscesso","procedimentos_gerais","observacoes","dados_completos_json"];
+const CAB_DENTE = ["id_exame","codigo_anonimizado","data_exame","dsei","dente","tipo","situacao","face_oclusal_incisal","face_vestibular","face_lingual_palatina","face_mesial","face_distal","dor_abscesso","procedimentos_indicados","procedimentos_realizados","observacao"];
+function linhaExame(e) {
+  const r = e.resultado, dor = Object.entries(e.dentes).filter(([, d]) => d.dor).map(([n]) => n).join(" ");
+  const json = Object.assign({}, e); delete json.envio;
+  return [e.id, e.codigo || "", e.dataExame, e.atualizadoEm, e.profissional.nome, e.profissional.cro, e.municipio, e.uf || "", e.dsei || "", e.polo || "", e.aldeia || "",
+    e.crianca.nascimento, e.idadeAnos, e.crianca.sexo, e.denticao, e.placa ? "sim" : "não", e.gengivite ? "sim" : "não", r.classe, r.risco,
+    r.ceod.c, r.ceod.e, r.ceod.o, r.ceod.total, r.cpod.c, r.cpod.p, r.cpod.o, r.cpod.total, dor, e.gerais.join("; "), e.observacoes, JSON.stringify(json)];
+}
+function linhasDentes(e) {
+  return Object.keys(e.dentes).map(Number).sort((a, b) => a - b).map(n => {
+    const d = e.dentes[n], p = d.procs || {};
+    const proc = v => Object.keys(p).filter(k => p[k] === v).map(k => PROC_NOME[k]).join("; ");
+    const f = k => FACE_NOME[d.faces[k]] || "";
+    const semFaces = ["nao_erupc","ausente","ausente_carie","raiz"].includes(d.status);
+    return [e.id, e.codigo || "", e.dataExame, e.dsei || "", n, ehDecid(n) ? "decíduo" : "permanente", STATUS_NOME[d.status],
+      semFaces ? "" : f("O"), semFaces ? "" : f("V"), semFaces ? "" : f("L"), semFaces ? "" : f("M"), semFaces ? "" : f("D"),
+      d.dor ? "sim" : "não", proc("indicado"), proc("realizado"), d.obs || ""];
+  });
+}
+function csv(linhas) {
+  return "\ufeff" + linhas.map(r => r.map(v => { v = v == null ? "" : String(v); return /[;"\n\r]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v; }).join(";")).join("\r\n");
+}
+function baixar(nome, texto) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([texto], {type: "text/csv;charset=utf-8"}));
+  a.download = nome; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+
+/* ---------- envio ---------- */
+async function enviarUm(e, c) {
+  const corpo = {versaoApp: 6, chave: c.chave, id: e.id, cabecalhoExame: CAB_EXAME, linhaExame: linhaExame(e), cabecalhoDentes: CAB_DENTE, linhasDentes: linhasDentes(e)};
+  const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), 30000);
+  try {
+    const resp = await fetch(c.url, {method: "POST", headers: {"Content-Type": "text/plain;charset=utf-8"}, body: JSON.stringify(corpo), signal: ctrl.signal});
+    let j; try { j = await resp.json(); } catch (x) { throw new Error("Resposta inesperada do servidor. Confira o endereço de envio."); }
+    if (!j.ok) throw new Error(j.erro || "O servidor recusou o exame.");
+  } finally { clearTimeout(t); }
+}
+async function sincronizar(manual) {
+  const c = cfg();
+  if (estado.enviando) return;
+  if (!c.url) { if (manual) toast("Informe o endereço de envio no Cadastro."); return; }
+  if (!navigator.onLine) { if (manual) toast("Sem internet agora. Os exames serão enviados quando a conexão voltar."); return; }
+  const pend = exames().filter(e => e.envio.estado !== "enviado");
+  if (!pend.length) { if (manual) toast("Todos os exames já foram enviados."); return; }
+  estado.enviando = true; atualizarRede(); if (estado.aba === "lista") renderLista();
+  let ok = 0, falha = 0;
+  for (const e of pend) {
+    let novo;
+    try { await enviarUm(e, c); novo = {estado: "enviado", em: new Date().toISOString(), tentativas: (e.envio.tentativas || 0) + 1}; ok++; }
+    catch (err) { novo = {estado: "erro", erro: err.name === "AbortError" ? "Tempo esgotado. Tente de novo." : (err.message === "Failed to fetch" || err.name === "TypeError" ? "Não foi possível conectar ao servidor." : err.message), tentativas: (e.envio.tentativas || 0) + 1}; falha++; }
+    const l = exames(), i = l.findIndex(x => x.id === e.id);
+    if (i >= 0 && l[i].atualizadoEm === e.atualizadoEm) { l[i].envio = novo; gravarExames(l); }
+  }
+  estado.enviando = false; atualizarRede(); if (estado.aba === "lista") renderLista();
+  if (ok || manual || falha) toast(falha ? `${ok} enviado(s), ${falha} com erro. Veja em Exames salvos.` : `${ok} ${ok === 1 ? "exame enviado" : "exames enviados"} para o banco de dados.`);
+}
+function atualizarRede() {
+  const on = navigator.onLine, pend = exames().filter(e => e.envio.estado !== "enviado").length;
+  $("#rede").classList.toggle("off", !on);
+  $("#redeTxt").textContent = estado.enviando ? "Enviando…" : (on ? "Online" : "Sem internet") + (pend ? `, ${pend} a enviar` : "");
+  const cp = $("#contPend"); cp.hidden = !pend; cp.textContent = pend;
+}
+
+/* ---------- navegação ---------- */
+function irAba(a) {
+  estado.aba = a;
+  $$(".abas button").forEach(b => b.setAttribute("aria-selected", b.dataset.aba === a));
+  ["exame","lista","painel","config"].forEach(x => $("#aba-" + x).hidden = x !== a);
+  $("#resultado").hidden = a !== "exame";
+  document.body.style.paddingBottom = a === "exame" ? "" : "24px";
+  if (a === "lista") renderLista();
+  if (a === "config") renderConfig();
+  if (a === "painel") abrirPainelAba();
+  if (a === "exame") {
+    if (!estado.ex._tocado && !estado.editando) { const c = cfg(); Object.assign(estado.ex, {uf: c.uf || "", dsei: c.dsei || "", polo: c.polo || ""}); }
+    renderFormulario();
+  }
+}
+function renderConfig() {
+  const c = cfg();
+  preencherDsei($("#cfgDsei"), c.uf, c.dsei);
+  renderCadStatus();
+  $$("[data-cfg]").forEach(i => i.value = c[i.dataset.cfg] || "");
+  $$("#segAgrup button").forEach(b => b.setAttribute("aria-pressed", b.dataset.ag === c.agrupamento));
+  avisoUrl();
+}
+const urlValida = u => /^https:\/\/script\.google\.com\/(a\/[^/]+\/)?macros\/s\/[^/]+\/exec$/.test(u || "");
+function avisoUrl() { const u = cfg().url; $("#urlAviso").hidden = !u || urlValida(u); }
+let tToast;
+function toast(msg) { const t = $("#toast"); t.textContent = msg; t.hidden = false; clearTimeout(tToast); tToast = setTimeout(() => t.hidden = true, 4200); }
+
+/* ---------- eventos ---------- */
+$(".abas").addEventListener("click", e => { const b = e.target.closest("[data-aba]"); if (b) irAba(b.dataset.aba); });
+document.addEventListener("click", e => { const b = e.target.closest("[data-ir]"); if (b) irAba(b.dataset.ir); });
+$("#rede").addEventListener("click", () => sincronizar(true));
+
+$("#aba-exame").addEventListener("input", e => {
+  const i = e.target;
+  if (i.dataset.campo) {
+    const ks = i.dataset.campo.split("."); let o = estado.ex; ks.slice(0, -1).forEach(k => o = o[k]); o[ks.at(-1)] = i.value;
+    if (i.dataset.campo === "uf") { preencherDsei($("#exDsei"), estado.ex.uf, estado.ex.dsei); estado.ex.dsei = $("#exDsei").value; }
+    if (["uf","polo","aldeia"].includes(i.dataset.campo)) renderCodigo();
+    if (i.dataset.campo === "crianca.nascimento" || i.dataset.campo === "dataExame") {
+      renderIdade();
+      const id = idadeEm(estado.ex.crianca.nascimento, estado.ex.dataExame);
+      const intocado = !Object.values(estado.ex.dentes).some(d => Object.values(d.faces).some(Boolean) || d.dor || ["ausente","ausente_carie","extr_ind","raiz"].includes(d.status));
+      if (id && intocado && !estado.editando) {
+        const sug = id.anos < 6 ? "decidua" : id.anos < 13 ? "mista" : "permanente";
+        if (sug !== estado.ex.denticao) { estado.ex.denticao = sug; estado.ex.dentes = {}; garantirDentes(estado.ex); renderOdonto(); renderResultado(); toast(`Dentição ${sug === "decidua" ? "decídua" : sug} selecionada pela idade. Você pode mudar.`); }
+      }
+    }
+    alterado();
+  }
+});
+$("#aba-exame").addEventListener("change", e => {
+  const g = e.target.dataset.geral;
+  if (g != null) { const nome = GERAIS[+g]; estado.ex.gerais = e.target.checked ? [...new Set([...estado.ex.gerais, nome])] : estado.ex.gerais.filter(x => x !== nome); alterado(); }
+});
+$$("[data-bool]").forEach(grp => grp.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  estado.ex[grp.dataset.bool] = b.dataset.v === "1"; alterado(); renderFormulario(); renderResultado();
+}));
+$("#segDenticao").addEventListener("click", e => {
+  const b = e.target.closest("[data-den]"); if (!b) return;
+  estado.ex.denticao = b.dataset.den; garantirDentes(estado.ex); alterado(); renderOdonto(); renderResultado();
+});
+$("#paleta").addEventListener("click", e => { const b = e.target.closest("[data-ferr]"); if (!b) return; estado.ferr = b.dataset.ferr; renderPaleta(); });
+$("#odonto").addEventListener("click", e => {
+  const cel = e.target.closest(".dente"); if (!cel) return;
+  const n = +cel.dataset.n;
+  if (e.target.closest(".num")) return abrirPainel(n);
+  const fe = e.target.closest("[data-face]");
+  aplicarFerr(n, fe ? fe.dataset.face : null);
+});
+$("#novoExame").addEventListener("click", () => {
+  if (estado.ex._tocado && !confirm("Descartar o exame em andamento e começar outro?")) return;
+  estado.ex = novoExame(); garantirDentes(estado.ex); estado.editando = null; store.set(K_RASC, null); renderExame();
+});
+$("#cancelarEdicao").addEventListener("click", () => {
+  if (!confirm("Descartar as alterações feitas neste exame?")) return;
+  estado.ex = novoExame(); garantirDentes(estado.ex); estado.editando = null; store.set(K_RASC, null); renderExame();
+});
+$("#salvar").addEventListener("click", salvarExame);
+$("#verMotivos").addEventListener("click", e => { const m = $("#motivos"); m.hidden = !m.hidden; e.target.setAttribute("aria-expanded", !m.hidden); e.target.textContent = m.hidden ? "Ver motivos" : "Ocultar motivos"; });
+
+// painel
+$("#fundo").addEventListener("click", e => {
+  if (e.target.id === "fundo") return fecharPainel();
+  const n = estado.sel, d = estado.ex.dentes[n], t = e.target;
+  const acao = t.closest("[data-acao]")?.dataset.acao;
+  if (acao === "fechar") return fecharPainel();
+  if (acao === "limpar") { estado.ex.dentes[n] = Object.assign(denteNovo(n, ""), {status: "presente"}); mudouDente(); return renderPainel(); }
+  const st = t.closest("[data-status]");
+  if (st) { d.status = st.dataset.status; if (["ausente","ausente_carie","nao_erupc"].includes(d.status)) { d.faces = facesVazias(); d.dor = false; } if (d.status === "raiz") d.faces = facesVazias(); mudouDente(); return renderPainel(`[data-status="${d.status}"]`); }
+  const pr = t.closest("[data-proc]");
+  if (pr) { if (pr.dataset.val) d.procs[pr.dataset.proc] = pr.dataset.val; else delete d.procs[pr.dataset.proc]; mudouDente(); return renderPainel(`[data-proc="${pr.dataset.proc}"][data-val="${pr.dataset.val}"]`); }
+});
+$("#fundo").addEventListener("change", e => {
+  const n = estado.sel, d = estado.ex.dentes[n], t = e.target;
+  if (t.dataset.facesel) { d.faces[t.dataset.facesel] = t.value; if (t.value && d.status !== "extr_ind") d.status = "presente"; mudouDente(); renderPainel(`[data-facesel="${t.dataset.facesel}"]`); }
+  if ("dor" in t.dataset) { d.dor = t.checked; if (d.dor && ["ausente","ausente_carie","nao_erupc"].includes(d.status)) d.status = "presente"; mudouDente(); renderPainel("[data-dor]"); }
+});
+$("#fundo").addEventListener("input", e => { if ("obs" in e.target.dataset) { estado.ex.dentes[estado.sel].obs = e.target.value; alterado(); } });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("#fundo").hidden) fecharPainel(); });
+
+// lista
+$("#lista").addEventListener("click", e => {
+  const a = e.target.closest("[data-abrir]"); if (a) return abrirExame(a.dataset.abrir);
+  const x = e.target.closest("[data-excluir]"); if (x) return excluirExame(x.dataset.excluir);
+});
+$("#enviarTudo").addEventListener("click", () => sincronizar(true));
+$("#reenviarTodos").addEventListener("click", () => {
+  const l = exames(); if (!l.length) return;
+  if (!confirm(`Enviar de novo os ${l.length} exames deste aparelho para a planilha? Os que já estão lá são substituídos, sem duplicar.`)) return;
+  l.forEach(e => e.envio = {estado: "pendente", tentativas: 0}); gravarExames(l); renderLista(); sincronizar(true);
+});
+$("#csvExames").addEventListener("click", () => baixar(`exames_${hoje()}.csv`, csv([CAB_EXAME, ...exames().map(linhaExame)].map(l => l.filter((_, i) => i !== CAB_EXAME.indexOf("dados_completos_json"))))));
+$("#csvDentes").addEventListener("click", () => baixar(`dentes_${hoje()}.csv`, csv([CAB_DENTE, ...exames().flatMap(linhasDentes)])));
+
+// configurações
+$("#aba-config").addEventListener("input", e => { const k = e.target.dataset.cfg; if (k) { salvarCfg({[k]: e.target.value.trim()}); if (k === "url") avisoUrl(); renderCadStatus(); } });
+$("#irExame").addEventListener("click", () => {
+  const f = cadastroFaltando();
+  if (f.length) { toast(`Falta preencher: ${listaE(f.map(x => x[1]))}.`); return $(`[data-cfg="${f[0][0]}"]`).focus(); }
+  toast("Cadastro salvo."); irAba("exame"); window.scrollTo({top: 0});
+});
+$("#aba-config").addEventListener("change", e => {
+  const k = e.target.dataset.cfg;
+  if (k === "uf") { preencherDsei($("#cfgDsei"), e.target.value, cfg().dsei); salvarCfg({dsei: $("#cfgDsei").value}); estP.dsei = null; }
+  if (k === "dsei") estP.dsei = null;
+  renderCadStatus();
+});
+$("#segAgrup").addEventListener("click", e => { const b = e.target.closest("[data-ag]"); if (!b) return; salvarCfg({agrupamento: b.dataset.ag}); renderConfig(); renderResultado(); });
+$("#testar").addEventListener("click", async () => {
+  const c = cfg(), out = $("#testeRes");
+  if (!c.url) return out.textContent = "Informe o endereço de envio.";
+  if (!urlValida(c.url)) return out.textContent = "Endereço inválido: veja o aviso acima.";
+  if (!navigator.onLine) return out.textContent = "Sem internet agora.";
+  out.textContent = "Testando…";
+  try {
+    const r = await fetch(c.url + "?" + new URLSearchParams({acao: "teste", chave: c.chave}));
+    const j = await r.json();
+    out.textContent = j.ok ? (j.mensagem === "Servidor do odontograma ativo" ? "Conexão funcionando. Atualize o Codigo.gs da planilha para usar o painel." : j.mensagem) : j.erro;
+  } catch (x) { out.textContent = "Não foi possível conectar. Confira o endereço."; }
+});
+
+window.addEventListener("online", () => { atualizarRede(); sincronizar(); });
+window.addEventListener("offline", atualizarRede);
+setInterval(() => { if (exames().some(e => e.envio.estado !== "enviado")) sincronizar(); }, 120000);
+
+/* Agregação dos exames (mesmo código no app e no Codigo.gs da planilha) */
+function agregarExames(regs, agrup) {
+  var CL = ["A", "B", "C", "D", "E", "F"];
+  var FX = ["0 a 5 anos", "6 a 11 anos", "12 a 18 anos", "19 anos ou mais", "Idade não informada"];
+  function faixa(i) {
+    if (i === "" || i == null || isNaN(Number(i))) return FX[4];
+    i = Math.floor(Number(i));
+    return i <= 5 ? FX[0] : i <= 11 ? FX[1] : i <= 18 ? FX[2] : FX[3];
+  }
+  function nivel(c) {
+    var i = CL.indexOf(c);
+    if (agrup === "tres") return i < 2 ? "Baixo" : i < 4 ? "Moderado" : "Alto";
+    return i < 3 ? "Baixo" : "Alto";
+  }
+  function zeros(ks) { var o = {}; ks.forEach(function (k) { o[k] = 0; }); return o; }
+  var r = {n: 0, sexo: zeros(["F", "M", "NI"]), classe: zeros(CL), nivel: zeros(["Baixo", "Moderado", "Alto"]), faixas: {}, meses: {},
+    ceod: {soma: 0, n: 0}, cpod: {soma: 0, n: 0}, cpod12: {soma: 0, n: 0}, procs: {}, gerais: {}, placa: 0, gengivite: 0, procsRealizados: 0};
+  FX.forEach(function (f) { r.faixas[f] = {n: 0, sexo: zeros(["F", "M", "NI"]), classe: zeros(CL)}; });
+  regs.forEach(function (e) {
+    var res = e.resultado || {};
+    var c = CL.indexOf(res.classe) >= 0 ? res.classe : null;
+    if (!c) return;
+    r.n++;
+    var sx = e.crianca && e.crianca.sexo === "F" ? "F" : e.crianca && e.crianca.sexo === "M" ? "M" : "NI";
+    r.sexo[sx]++; r.classe[c]++; r.nivel[nivel(c)]++;
+    var f = r.faixas[faixa(e.idadeAnos)]; f.n++; f.sexo[sx]++; f.classe[c]++;
+    var mes = String(e.dataExame || "").slice(0, 7);
+    if (mes) r.meses[mes] = (r.meses[mes] || 0) + 1;
+    if (e.denticao !== "permanente" && res.ceod) { r.ceod.soma += Number(res.ceod.total) || 0; r.ceod.n++; }
+    if (e.denticao !== "decidua" && res.cpod) {
+      r.cpod.soma += Number(res.cpod.total) || 0; r.cpod.n++;
+      if (e.idadeAnos !== "" && e.idadeAnos != null && Math.floor(Number(e.idadeAnos)) === 12) { r.cpod12.soma += Number(res.cpod.total) || 0; r.cpod12.n++; }
+    }
+    if (e.placa) r.placa++;
+    if (e.gengivite) r.gengivite++;
+    (e.gerais || []).forEach(function (g) { r.gerais[g] = (r.gerais[g] || 0) + 1; });
+    Object.keys(e.dentes || {}).forEach(function (n) {
+      var p = (e.dentes[n] || {}).procs || {};
+      Object.keys(p).forEach(function (k) {
+        if (p[k] !== "indicado" && p[k] !== "realizado") return;
+        if (!r.procs[k]) r.procs[k] = {indicado: 0, realizado: 0};
+        r.procs[k][p[k]]++;
+        if (p[k] === "realizado") r.procsRealizados++;
+      });
+    });
+  });
+  function media(o) { return o.n ? Math.round(o.soma / o.n * 100) / 100 : null; }
+  r.ceodMedia = media(r.ceod); r.cpodMedia = media(r.cpod); r.cpod12Media = media(r.cpod12);
+  var m = r.cpod12Media == null ? null : Math.round(r.cpod12Media * 10) / 10;
+  r.cpod12Severidade = m == null ? null : m <= 1.1 ? "Muito baixa" : m <= 2.6 ? "Baixa" : m <= 4.4 ? "Moderada" : m <= 6.5 ? "Alta" : "Muito alta";
+  return r;
+}
+
+/* ---------- painel ---------- */
+const estP = {visao: "geral", periodo: "ano", dsei: null, extras: []};
+const COR_CLASSE = {A:"#2E8B57", B:"#5E9C35", C:"#D7A406", D:"#E07A1F", E:"#D7263D", F:"#86112C"};
+const ehNum = v => typeof v === "number";
+const fmtN = v => v == null ? "–" : ehNum(v) ? v.toLocaleString("pt-BR", {maximumFractionDigits: 2}) : String(v);
+const pctDe = (v, t) => ehNum(v) && ehNum(t) && t ? Math.round(v / t * 100) + "%" : v === "<5" ? "<5" : "–";
+const fmtDataHora = iso => { const d = new Date(iso); return isNaN(d) ? "" : d.toLocaleDateString("pt-BR") + " às " + d.toLocaleTimeString("pt-BR", {hour: "2-digit", minute: "2-digit"}); };
+function isoDia(d) { d = new Date(d); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 10); }
+function intervalo(v) {
+  const h = hoje();
+  if (v === "tudo") return {de: "", ate: ""};
+  if (v === "ano") return {de: h.slice(0, 4) + "-01-01", ate: h};
+  const d = new Date(); d.setDate(d.getDate() - Number(v)); return {de: isoDia(d), ate: h};
+}
+function barra(v, total, cor) {
+  const w = ehNum(v) && ehNum(total) && total ? Math.max(v ? 2 : 0, v / total * 100) : v === "<5" ? 3 : 0;
+  return `<span class="barra"><span style="width:${w}%;background:${cor}"></span></span>`;
+}
+function abrirPainelAba() {
+  const nomes = [...new Set([...DSEIS, ...estP.extras])];
+  if (estP.dsei === null || !nomes.includes(estP.dsei)) estP.dsei = cfg().dsei || nomes[0];
+  $("#pDsei").innerHTML = nomes.map(d => `<option ${d === estP.dsei ? "selected" : ""}>${esc(d)}</option>`).join("");
+  $("#pDsei").value = estP.dsei;
+  $$("#segVisao button").forEach(b => b.setAttribute("aria-pressed", b.dataset.visao === estP.visao));
+  $("#campoPDsei").hidden = estP.visao !== "dsei";
+  $("#pExplica").textContent = {geral: "Todos os exames enviados por todos os profissionais que usam o app, de todos os DSEIs.",
+    dsei: "Todos os exames enviados por todos os profissionais do DSEI escolhido.",
+    minha: "Só os exames salvos neste aparelho. Só você vê estes números."}[estP.visao];
+  $("#pPeriodo").value = estP.periodo;
+  carregarPainel();
+}
+const dseiPedido = () => estP.visao === "dsei" ? estP.dsei : "";
+function textoRecorte(de, ate) { return (estP.visao === "minha" ? "sua produção neste aparelho" : estP.visao === "geral" ? "todos os participantes" : estP.dsei) + (de ? `, de ${fmtData(de)} a ${fmtData(ate)}` : ", todo o período"); }
+async function carregarPainel() {
+  const {de, ate} = intervalo(estP.periodo), ag = cfg().agrupamento, st = $("#pStatus");
+  if (estP.visao === "minha") {
+    const regs = exames().filter(e => (!de || e.dataExame >= de) && (!ate || e.dataExame <= ate));
+    st.textContent = `Mostrando ${textoRecorte(de, ate)}. Só você vê estes números.`;
+    return desenharPainel({resumo: agregarExames(regs, ag)}, true);
+  }
+  const c = cfg(), chave = JSON.stringify([dseiPedido(), de, ate, ag]), cache = store.get(K_PAINEL, {});
+  const usarCache = motivo => {
+    const x = cache[chave];
+    if (x) { st.textContent = `${motivo} Mostrando os números de ${fmtDataHora(x.em)} (${textoRecorte(de, ate)}).`; desenharPainel(x.dados, false); }
+    else { st.textContent = motivo; $("#pConteudo").innerHTML = `<div class="bloco vazio">Os números de todos os participantes aparecem aqui quando o aparelho estiver conectado à internet. Depois disso, ficam guardados para consulta offline.</div>`; }
+  };
+  if (!c.url || !c.chave) return usarCache("Informe o endereço de envio e a chave no Cadastro para ver o painel dos DSEIs.");
+  if (!navigator.onLine) return usarCache("Sem internet agora.");
+  st.textContent = "Carregando…"; $("#pAtualizar").disabled = true;
+  try {
+    const r = await fetch(c.url + (c.url.includes("?") ? "&" : "?") + new URLSearchParams({acao: "painel", chave: c.chave, dsei: dseiPedido(), de, ate, agrup: ag}));
+    let j; try { j = await r.json(); } catch (x) { throw new Error("rede"); }
+    if (!j.ok) throw new Error(j.erro || "O servidor recusou o pedido.");
+    if (!j.resumo || j.versao == null || j.versao < 5) throw new Error("A planilha ainda está rodando uma versão antiga do código, por isso o painel fica vazio. No Apps Script, cole o Codigo.gs novo e clique em Implantar > Gerenciar implantações > lápis > Versão: Nova versão > Implantar.");
+    cache[chave] = {em: new Date().toISOString(), dados: j};
+    const ks = Object.keys(cache).sort((a, b) => cache[b].em.localeCompare(cache[a].em));
+    ks.slice(12).forEach(k => delete cache[k]);
+    store.set(K_PAINEL, cache);
+    const novos = (j.dseis || []).filter(d => !DSEIS.includes(d));
+    if (novos.join() !== estP.extras.join()) { estP.extras = novos; }
+    st.textContent = `Atualizado agora: ${textoRecorte(de, ate)}.` + (j.participantes != null ? ` Na planilha há ${j.totalExames} ${j.totalExames === 1 ? "exame" : "exames"} no total, de todos os períodos.` : "");
+    desenharPainel(j, false);
+  } catch (err) {
+    usarCache(err.message === "rede" || err.name === "TypeError" ? "Não foi possível buscar os dados agora." : err.message);
+  } finally { $("#pAtualizar").disabled = false; }
+}
+function tabelaComparacao(lista) {
+  if (!lista || !lista.length) return "";
+  const meu = cfg().dsei;
+  return `<div class="bloco"><h3>Comparação entre DSEIs</h3><div class="tabela"><table>
+    <thead><tr><th>DSEI</th><th>Crianças</th><th>Alto risco</th><th>ceo-d médio</th><th>CPO-D médio</th><th>Procedimentos realizados</th></tr></thead>
+    <tbody>${lista.map(l => `<tr class="${l.dsei === meu ? "meu" : ""}"><td>${esc(l.dsei)}</td><td>${fmtN(l.n)}</td>${
+      l.n === "<5" ? `<td>–</td><td>–</td><td>–</td><td>–</td>` : `<td>${l.pctAlto}%</td><td>${fmtN(l.ceod)}</td><td>${fmtN(l.cpod)}</td><td>${fmtN(l.procs)}</td>`}</tr>`).join("")}</tbody></table></div>
+    <p class="nota">O período é o mesmo escolhido acima. A linha destacada é o seu DSEI.</p></div>`;
+}
+function desenharPainel(d, local) {
+  const r = d.resumo, box = $("#pConteudo");
+  const nota = local ? "" : `<p class="nota" style="margin:0 4px 16px">“&lt;5” indica de 1 a 4 crianças: o número exato é ocultado para proteger a identidade delas. Médias só aparecem com 5 crianças ou mais. Nenhum nome ou Cartão SUS sai da planilha.</p>`;
+  if (!r || r.n === 0) { box.innerHTML = `<div class="bloco vazio">Nenhum exame neste recorte${estP.periodo !== "tudo" ? ". Experimente o período “Todo o período”." : "."}</div>` + tabelaComparacao(d.comparacao); return; }
+  if (r.poucos) { box.innerHTML = `<div class="bloco vazio">Menos de 5 crianças neste recorte. Para proteger a identidade delas, os detalhes não são mostrados. Amplie o período ou escolha “Todos os DSEIs”.</div>` + tabelaComparacao(d.comparacao) + nota; return; }
+  const CL = ["A","B","C","D","E","F"];
+  const niveis = cfg().agrupamento === "tres" ? ["Baixo","Moderado","Alto"] : ["Baixo","Alto"];
+  const kpis = `<div class="kpis">
+    ${!local && d.participantes != null ? `<div class="kpi"><b>${fmtN(d.participantes)}</b><span>${d.participantes === 1 ? "profissional participante" : "profissionais participantes"}</span></div>` : ""}
+    <div class="kpi"><b>${fmtN(r.n)}</b><span>crianças examinadas</span></div>
+    <div class="kpi"><b>${pctDe(r.nivel.Alto, r.n)}</b><span>em alto risco (${fmtN(r.nivel.Alto)})</span></div>
+    <div class="kpi"><b>${fmtN(r.ceodMedia)}</b><span>ceo-d médio</span></div>
+    <div class="kpi"><b>${fmtN(r.cpodMedia)}</b><span>CPO-D médio</span></div>
+    <div class="kpi"><b>${fmtN(r.procsRealizados)}</b><span>procedimentos realizados</span></div></div>`;
+  const classes = `<div class="bloco"><h3>Classificação de risco</h3>${CL.map(c => `<div class="linha-barra"><span class="classe micro" data-c="${c}">${c}</span>${barra(r.classe[c], r.n, COR_CLASSE[c])}<span class="val">${fmtN(r.classe[c])}</span></div>`).join("")}
+    <p class="nota">${niveis.map(n => `${n === "Alto" ? "Alto" : n} risco: ${fmtN(r.nivel[n])} (${pctDe(r.nivel[n], r.n)})`).join("; ")}.</p></div>`;
+  const fx = Object.entries(r.faixas).filter(([, v]) => v.n !== 0);
+  const faixas = `<div class="bloco"><h3>Idade, sexo e risco</h3><div class="tabela"><table>
+    <thead><tr><th>Faixa etária</th><th>Crianças</th><th>Fem.</th><th>Masc.</th><th>Não inf.</th>${CL.map(c => `<th>${c}</th>`).join("")}</tr></thead>
+    <tbody>${fx.map(([f, v]) => `<tr><td>${esc(f)}</td><td>${fmtN(v.n)}</td><td>${fmtN(v.sexo.F)}</td><td>${fmtN(v.sexo.M)}</td><td>${fmtN(v.sexo.NI)}</td>${CL.map(c => `<td>${fmtN(v.classe[c])}</td>`).join("")}</tr>`).join("")}
+    <tr><td><b>Total</b></td><td><b>${fmtN(r.n)}</b></td><td>${fmtN(r.sexo.F)}</td><td>${fmtN(r.sexo.M)}</td><td>${fmtN(r.sexo.NI)}</td>${CL.map(c => `<td>${fmtN(r.classe[c])}</td>`).join("")}</tr></tbody></table></div></div>`;
+  const c12 = r.cpod12 && r.cpod12.n;
+  const cpod12 = `<div class="bloco"><h3>CPO-D aos 12 anos</h3>${
+    !c12 ? `<p class="dica">Nenhuma criança de 12 anos com dentes permanentes neste recorte.</p>` :
+    r.cpod12Media == null ? `<p class="dica">${fmtN(c12)} crianças de 12 anos. A média aparece a partir de 5 crianças.</p>` :
+    `<p class="destaque">${fmtN(r.cpod12Media)}</p><p class="dica">Severidade ${esc(r.cpod12Severidade.toLowerCase())} pela classificação da OMS, com ${fmtN(c12)} crianças de 12 anos.</p>`}
+    <p class="nota" style="margin-top:12px">Placa visível em ${fmtN(r.placa)} e gengivite em ${fmtN(r.gengivite)} crianças.</p></div>`;
+  const procsLista = PROCS.filter(([k]) => r.procs[k]);
+  const maxP = Math.max(1, ...procsLista.map(([k]) => r.procs[k].realizado + r.procs[k].indicado));
+  const procs = `<div class="bloco"><h3>Procedimentos por dente</h3>${!procsLista.length ? `<p class="dica">Nenhum procedimento registrado.</p>` : `<div class="tabela"><table>
+    <thead><tr><th>Procedimento</th><th>Indicados</th><th>Realizados</th><th style="width:30%"></th></tr></thead>
+    <tbody>${procsLista.map(([k, nome]) => `<tr><td>${esc(nome)}</td><td>${fmtN(r.procs[k].indicado)}</td><td><b>${fmtN(r.procs[k].realizado)}</b></td><td>${barra(r.procs[k].realizado, maxP, "var(--accent)")}</td></tr>`).join("")}</tbody></table></div>`}</div>`;
+  const gerais = `<div class="bloco"><h3>Procedimentos coletivos e de boca toda</h3>${GERAIS.map(g => `<div class="linha-barra" style="grid-template-columns:1fr 52px"><span>${esc(g)}</span><span class="val">${fmtN(r.gerais[g] || 0)}</span></div>`).join("")}<p class="nota">Número de crianças que receberam cada procedimento.</p></div>`;
+  const ms = Object.keys(r.meses).sort();
+  const maxM = Math.max(1, ...ms.map(m => ehNum(r.meses[m]) ? r.meses[m] : 0));
+  const nomeMes = m => ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"][+m.slice(5, 7) - 1] + "/" + m.slice(2, 4);
+  const meses = `<div class="bloco"><h3>Crianças examinadas por mês</h3><div class="meses">${ms.map(m => { const v = r.meses[m]; const h = ehNum(v) ? Math.max(4, v / maxM * 110) : 6;
+    return `<div class="mes"><b>${fmtN(v)}</b><i style="height:${h}px"></i><span>${nomeMes(m)}</span></div>`; }).join("")}</div></div>`;
+  box.innerHTML = kpis + `<div class="p-grade">${classes}${cpod12}</div>` + faixas + `<div class="p-grade">${procs}${gerais}</div>` + meses + tabelaComparacao(d.comparacao) + nota;
+}
+$("#segVisao").addEventListener("click", e => { const b = e.target.closest("[data-visao]"); if (!b) return; estP.visao = b.dataset.visao; abrirPainelAba(); });
+$("#pDsei").addEventListener("change", e => { estP.dsei = e.target.value; carregarPainel(); });
+$("#pPeriodo").addEventListener("change", e => { estP.periodo = e.target.value; carregarPainel(); });
+$("#pAtualizar").addEventListener("click", carregarPainel);
+
+/* ---------- início ---------- */
+$$(".lista-uf").forEach(sel => sel.innerHTML = `<option value="">Escolha a UF</option>` + UFS.map(u => `<option>${u}</option>`).join(""));
+$("#avisoArmaz").hidden = armazenamentoOk;
+renderExame(); atualizarRede();
+if (cadastroFaltando().length) irAba("config");
+sincronizar();
+if ("serviceWorker" in navigator && location.protocol.startsWith("http")) navigator.serviceWorker.register("sw.js").catch(() => {});
+</script>
+</body>
+</html>
