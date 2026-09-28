@@ -12,16 +12,41 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <style>
-:root{
-  --bg:#E9EFF1; --surface:#FFFFFF; --surface-2:#F3F6F7; --ink:#14324A; --muted:#566E7E; --line:#C8D5DC;
-  --accent:#0E6E73; --accent-soft:#DCEFEF; --focus:#F2A900;
-  --carie:#D7263D; --carie-cr:#7E3524; --mba:#F4B4BD; --mbi:#C3CDD5; --rest:#2F67D8; --sel:#27946A;
-  --enamel:#FCFCFA; --dor:#E07A1F;
-  --r-sm:6px; --r-md:10px;
-  box-sizing:border-box;
-  padding-top:env(safe-area-inset-top,0px);
-  font-family:"Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  color:var(--ink); background:var(--bg);
+:root {
+  --verde-claro: #a3cf5a;
+  --verde-escuro: #077568;
+  --amarelo: #ffd666;
+  --branco: #ffffff;
+  --fonte-principal: 'Roboto', sans-serif;
+}
+
+body {
+  font-family: var(--fonte-principal);
+  color: var(--verde-escuro);
+  background-color: var(--branco);
+}
+
+.botao-primario {
+  background-color: var(--verde-claro);
+  color: var(--branco);
+  border: none;
+  border-radius: 8px;
+}
+
+.botao-secundario {
+  background-color: var(--amarelo);
+  color: var(--verde-escuro);
+  border: 2px solid var(--verde-escuro);
+  border-radius: 8px;  
+}
+
+h1, h2, h3 {
+  color: var(--verde-escuro);
+}
+
+.barra-superior {
+  background-color: var(--verde-claro);
+  background-image: url('textura-pincelada.png');
 }
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
